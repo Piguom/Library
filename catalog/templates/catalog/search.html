@@ -1,0 +1,56 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    <h1>Résultat de la recherche </h1>
+
+     <ul class="collapsible popout" data-collapsible="accordion">
+        <li id="shop">
+          <div class="collapsible-header"><i class="material-icons">account_balance</i>Boutiques<span class="new badge red" data-badge-caption="">{{boutique.count }}</span></div>
+          <div class="collapsible-body">
+                  {% for boutique in boutique %}
+                      {% if 'user.can_delete_boutique' in perms %}
+                          <a href="/catalog/boutique/{{ boutique.id }}/delete" class="btn-floating waves-effect" style="background-color : rgba(240,10,10,0.7)">
+                              <i class="material-icons">delete</i>
+                          </a>
+                      {% endif %}
+                      <a href="/catalog/boutique/{{ boutique.id }}">{{ boutique.name }} ({{ boutique.open_year }})</a>
+                      <br>
+                  {% endfor %}              
+          </div>
+        </li>
+        <li id="book">
+          <div class="collapsible-header"><i class="material-icons">book</i>Book<span class="new badge red" data-badge-caption="">{{ book.count }}</span></div>
+          <div class="collapsible-body">
+                  {% for book in book %}
+                      {% if 'user.can_delete_book' in perms %}
+                          <a href="/catalog/book/{{ book.id }}/delete" class="btn-floating waves-effect " style="background-color : rgba(240,10,10,0.7)">
+                              <i class="material-icons">delete</i>
+                          </a>
+                      {% endif %}
+                      {% if book.photo %}
+                          <img src="{{book.photo.url}}" width="50" height="50" style="margin-bottom:-1.5%;">
+                      {% endif %}
+                      <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+                      <br>
+                  {% endfor %}
+          </div>
+        </li>
+        <li id="author">
+          <div class="collapsible-header"><i class="material-icons">create</i>Author<span class="new badge red" data-badge-caption="">{{author.count}}</span></div>
+          <div class="collapsible-body">
+                  {% for author in author %}
+                      {% if 'user.can_delete_author' in perms %}
+                          <a href="/catalog/author/{{ author.id }}/delete" class="btn-floating waves-effect" style="background-color : rgba(240,10,10,0.7)">
+                              <i class="material-icons">delete</i>
+                          </a>
+                      {% endif %}
+                      <a href="/catalog/author/{{ author.id }}">{{ author.first_name }} {{ author.last_name }} ({{ author.date_of_birth }} ~ {{ author.date_of_death }})</a>
+                      <br>
+                  {% endfor %}              
+          </div>
+        </li>
+      </ul>
+
+ 
+{% endblock %}

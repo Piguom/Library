@@ -1,0 +1,71 @@
+{% extends "base_generic.html" %}
+{% block content %}
+    <div>
+        <h1>Book List ({{book_list|length}})</h1>
+        
+        <ul class="pagination">
+            <li class="waves-effect"><a href="?page=1">1</a></li>
+            <li class="waves-effect"><a href="?page=2">2</a></li>
+            <li class="waves-effect"><a href="?page=3">3</a></li>
+            <li class="waves-effect"><a href="?page=4">4</a></li>
+            <li class="waves-effect"><a href="?page=4">4</a></li>
+            <li class="waves-effect"><a href="?page=5">5</a></li>
+            <li class="waves-effect"><a href="?page=6">6</a></li>
+            <li class="waves-effect"><a href="?page=7">7</a></li>
+            <li class="waves-effect"><a href="?page=8">8</a></li>
+            <li class="waves-effect"><a href="?page=9">9</a></li>
+            <li class="waves-effect"><a href="?page=A">A</a></li>
+            <li class="waves-effect"><a href="?page=B">B</a></li>
+            <li class="waves-effect"><a href="?page=C">C</a></li>
+            <li class="waves-effect"><a href="?page=D">D</a></li>
+            <li class="waves-effect"><a href="?page=E">E</a></li>
+            <li class="waves-effect"><a href="?page=F">F</a></li>
+            <li class="waves-effect"><a href="?page=G">G</a></li>
+            <li class="waves-effect"><a href="?page=H">H</a></li>
+            <li class="waves-effect"><a href="?page=I">I</a></li>
+            <li class="waves-effect"><a href="?page=J">J</a></li>
+            <li class="waves-effect"><a href="?page=K">K</a></li>
+            <li class="waves-effect"><a href="?page=L">L</a></li>
+            <li class="waves-effect"><a href="?page=M">M</a></li>
+            <li class="waves-effect"><a href="?page=N">N</a></li>
+            <li class="waves-effect"><a href="?page=O">O</a></li>
+            <li class="waves-effect"><a href="?page=P">P</a></li>
+            <li class="waves-effect"><a href="?page=Q">Q</a></li>
+            <li class="waves-effect"><a href="?page=R">R</a></li>
+            <li class="waves-effect"><a href="?page=S">S</a></li>
+            <li class="waves-effect"><a href="?page=T">T</a></li>
+            <li class="waves-effect"><a href="?page=U">U</a></li>
+            <li class="waves-effect"><a href="?page=V">V</a></li>
+            <li class="waves-effect"><a href="?page=W">W</a></li>
+            <li class="waves-effect"><a href="?page=X">X</a></li>
+            <li class="waves-effect"><a href="?page=Y">Y</a></li>
+            <li class="waves-effect"><a href="?page=Z">Z</a></li>
+          </ul>
+            
+          {% if 'user.can_add_book' in perms %}
+              <a href="/catalog/book/create" class="btn-floating waves-effect " style="float:right;">
+                <i class="material-icons">add</i>
+              </a>
+          {% endif %}
+          
+    </div> 
+    {% if book_list %}
+    <ul>
+        {% for book in book_list %}
+              <li>
+                  {% if 'user.can_delete_book' in perms %}
+                      <a href="/catalog/book/{{ book.id }}/delete" class="btn-floating waves-effect " style="background-color : rgba(240,10,10,0.7)">
+                          <i class="material-icons">delete</i>
+                      </a>
+                  {% endif %}
+                  {% if book.photo %}
+                      <img src="{{book.photo.url}}" width="50" height="50" style="margin-bottom:-1.5%;">
+                  {% endif %}
+                  <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+              </li>
+              {% endfor %}
+        </ul>
+    {% else %}
+      <p>There are no books in the library.</p>
+    {% endif %}      
+{% endblock %}

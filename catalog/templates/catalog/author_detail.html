@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <p>
+  <h1>{% if author.image %}
+    <img src="{{author.image.url}}" width="120" height="100" style="margin-bottom:-1.5%;">
+  {% endif %}{{ author.first_name }} {{author.last_name}}</h1><h10>{{ author.date_of_birth }} ~ {{author.date_of_death}}</h10>
+  </p>
+  <br>
+  <div>
+        <nav class="nav-extended" style="background-color:rgb(150, 100, 250);">
+            <div class="nav-wrapper">
+              <h10 href="{% url 'user' %}" class="brand-logo">&nbsp; {{author.get_books_count}} livres écrits et disponibles dans le catalogue</h10>
+            </div>
+        </nav>
+    </div>
+  <div class="row">
+  {% for book in author.get_books_from_author %}
+                <div class="col s6 m3">
+                  <div class="card">
+                    <div class="card-image">
+                        {% if book.photo %}
+                            <img src="{{book.photo.url}}" width="300" height="300" >
+                        {% else %}
+                            <img src="/media/media/images/livre.jpg" width="300" height="300">
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                      {% if book.summary %}
+                          <p>{{book.summary}}</p>
+                      {% else %}
+                          <p>Aucun résumé pour ce livre</p>
+                      {% endif %}
+                      <br>
+                      {{boutique.author}}
+                    </div>
+                    <div class="card-action">
+                      <a href="/catalog/book/{{ book.id }}">{{book.title}}</a>
+                    </div>
+                  </div>
+                </div>
+      {% endfor %}
+            </div>
+{% endblock %}

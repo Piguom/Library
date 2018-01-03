@@ -1,0 +1,64 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div>
+        <h1>Boutique List ({{boutique_list|length}})</h1>
+        
+          <ul class="pagination">
+            <li class="disabled"><a href="?page={{boutique.previous_page}}"><i class="material-icons">chevron_left</i></a></li>
+            <li class="waves-effect"><a href="?page=A">A</a></li>
+            <li class="waves-effect"><a href="?page=B">B</a></li>
+            <li class="waves-effect"><a href="?page=C">C</a></li>
+            <li class="waves-effect"><a href="?page=D">D</a></li>
+            <li class="waves-effect"><a href="?page=E">E</a></li>
+            <li class="waves-effect"><a href="?page=F">F</a></li>
+            <li class="waves-effect"><a href="?page=G">G</a></li>
+            <li class="waves-effect"><a href="?page=H">H</a></li>
+            <li class="waves-effect"><a href="?page=I">I</a></li>
+            <li class="waves-effect"><a href="?page=J">J</a></li>
+            <li class="waves-effect"><a href="?page=K">K</a></li>
+            <li class="waves-effect"><a href="?page=L">L</a></li>
+            <li class="waves-effect"><a href="?page=M">M</a></li>
+            <li class="waves-effect"><a href="?page=N">N</a></li>
+            <li class="waves-effect"><a href="?page=O">O</a></li>
+            <li class="waves-effect"><a href="?page=P">P</a></li>
+            <li class="waves-effect"><a href="?page=Q">Q</a></li>
+            <li class="waves-effect"><a href="?page=R">R</a></li>
+            <li class="waves-effect"><a href="?page=S">S</a></li>
+            <li class="waves-effect"><a href="?page=T">T</a></li>
+            <li class="waves-effect"><a href="?page=U">U</a></li>
+            <li class="waves-effect"><a href="?page=V">V</a></li>
+            <li class="waves-effect"><a href="?page=W">W</a></li>
+            <li class="waves-effect"><a href="?page=X">X</a></li>
+            <li class="waves-effect"><a href="?page=Y">Y</a></li>
+            <li class="waves-effect"><a href="?page=Z">Z</a></li>
+            <li class="waves-effect"><a href="?page={{boutique.next_page}}"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+            
+        
+        {% if 'user.can_add_boutique' in perms %}
+            <a href="/catalog/boutique/create" class="btn-floating waves-effect " style="float:right;">
+                <i class="material-icons">add</i>
+            </a>
+        {% endif %}
+    </div>
+
+    {% if boutique_list %}
+    <ul>
+
+      {% for boutique in boutique_list %}
+      <li>
+          {% if 'user.can_delete_boutique' in perms %}
+              <a href="/catalog/boutique/{{ boutique.id }}/delete" class="btn-floating waves-effect" style="background-color : rgba(240,10,10,0.7)">
+                  <i class="material-icons">delete</i>
+              </a>
+          {% endif %}
+          <a href="/catalog/boutique/{{ boutique.id }}">{{ boutique.name }} ({{ boutique.open_year }})</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no boutique references in the library.</p>
+    {% endif %}       
+{% endblock %}

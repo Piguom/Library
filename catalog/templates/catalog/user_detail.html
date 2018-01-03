@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Bonjour {{user.username}}</h1>
+    
+    <div>
+        <nav class="nav-extended" style="background-color:rgb(150, 100, 250);">
+            <div class="nav-wrapper">
+              <h10 href="{% url 'user' %}" class="brand-logo">&nbsp; Informations Personnelles</h10>
+              <a href="/catalog/user/{{user.id}}/update" class="waves-effect tooltipped" data-tooltip="Modifier mes informations" style="float:right; margin-right:2%;">
+                  <i class="material-icons">border_color</i>
+              </a>
+            </div>
+        </nav>
+    </div>
+    
+    <hr>
+        
+    <div class="container">
+        <table class="striped">
+            <tr>
+                <td><b>Prénom : </b>{{user.first_name}}<td>
+                <td><b>Nom de famille : </b>{{user.last_name}}</td>
+            </tr>
+            <tr>
+                <td><b>Email : </b>{{user.email}}</td>
+            </tr>
+            <tr>
+                <td><a href="{% url 'password_reset' %}">Modifier mot de passe</a></td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
