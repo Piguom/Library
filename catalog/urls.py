@@ -42,3 +42,8 @@ urlpatterns += [
     url(r'^user/(?P<pk>\d+)/update$', views.UserUpdate.as_view(), name='user_update'),
     url(r'search/$', views.search, name='search'),
 ]
+
+urlpatterns += [
+        url(r'^cart/$', views.CartView.as_view(), name='cart'),
+        url(r'^comparaison/$', views.comparaison, name='comparaison'),
+]

@@ -9,6 +9,14 @@
   <p><strong>Author:</strong> <a href="/catalog/author/{{ book.author.id }}">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
   <p><strong>Summary:</strong> {{ book.summary }}</p>
   <p><strong>ISBN:</strong> {{ book.isbn }}</p> 
-  <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>    
-  
-{% endblock %}
+  <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  <div class="row ">    
+      <div class="col s6">
+        <form method="GET" action="{% url 'cart' %}">
+            <input type="hidden" name="ItemID" value="{{book.id}}" />
+            <p>Quantity <input type="number" name="qty" value="1" /><p>
+            <input type="submit" value="Add to Cart" class="btn btn-default" />
+        </form>
+      </div>
+   </div>
+{% endblock %}  

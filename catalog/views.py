@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.views.generic.base import View
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm, User
 
-from .models import Book, Author, BookInstance, Boutique
+from .models import Book, Author, BookInstance, Boutique, Panier, PanierItem
+
 
 def register(request):
     if request.method == 'POST':
@@ -23,6 +25,7 @@ def user(request):
     return render(
         request,
         'catalog/user_detail.html',
+        {'cart':Panier.objects.all()}
     )
 
 def index(request):
@@ -217,3 +220,93 @@ def search(request):
                     'author' : Author.objects.filter(first_name__icontains=request.GET.get('q')),
                     'boutique' : Boutique.objects.filter(name__icontains=request.GET.get('q'))
                     })
+
+########Customer Cart functions#########
+class CartView(View):
+        model = Panier
+        template_name = "catalog/panier.html"
+        
+        def get(self, request):
+                self.request.session.set_expiry(0) #till browser closed
+
+                cart_id = self.request.session.get("catalogID") #you can use any name "cartID"
+
+                #if no session exist, create new and save
+                if cart_id == None:
+                    cart = Panier()
+                    cart.save()
+    
+                    #save cart_id for first use.
+                    cart_id = cart.id # After this it will save by line 18
+                    self.request.session["catalogID"] = cart.id #save session
+    
+                # save current cartID into cart,
+                # for displaying cart item in template
+                cart = Panier.objects.get(id=cart_id)
+
+                #if already login, save username in Cart
+                if self.request.user.is_authenticated == True:
+                        cart.user = self.request.user
+                        cart.save()
+
+                #ItemID is coming from book_detail.html
+                #get it to add the item in current session.
+                item_id = request.GET.get("ItemID")
+                
+                # get the book with format from above ID
+                item_instance = get_object_or_404(Book, id=item_id)
+
+                #save the above book in cart item
+                cart_item, created = PanierItem.objects.get_or_create(cart=cart, item=item_instance)
+                
+                item_qty = request.GET.get("qty")
+                
+                #get DeleteItem from url, defined in Format class
+                delete_item = request.GET.get("DeleteItem")
+                
+                if int(item_qty) < 1:
+                        delete_item = True
+                    
+                #both delete and qty appear on link, if DeleteItem exist then delete it,
+                #otherwise set the correct quntity.
+                if delete_item:
+                    cart_item.delete()
+                else:
+                    cart_item.quantity = item_qty
+                    cart_item.save()
+                        
+                context = {
+                        "cart": cart,
+                        "qty": item_qty,
+                }
+                template = self.template_name
+                return render(request, template, context)
+            
+########Compison function#########
+def comparaison(request):
+    template = "catalog/comparaison.html"
+    
+    comp1= "No book_id value in the form submited..."
+    comp2= "No book_id value in the form submited..."
+    comp3= "No book_id value in the form submited..."
+    comp4= "No book_id value in the form submited..."
+    
+    if "comp1" in request.GET :
+        comp1 = Book.objects.get(id=request.GET.get("comp1"))
+    if "comp2" in request.GET :
+        comp2 = Book.objects.get(id=request.GET.get("comp2"))
+    if "comp3" in request.GET :
+        comp3 = Book.objects.get(id=request.GET.get("comp3"))
+    if "comp4" in request.GET :
+        comp4 = Book.objects.get(id=request.GET.get("comp4"))
+        
+    context = {
+                  'boutique':Boutique.objects.all(),
+                   'book': Book.objects.all(),
+                   'author': Author.objects.all(), 
+                   'comp1': comp1,
+                   'comp2': comp2,
+                   'comp3': comp3,
+                   'comp4': comp4,
+              }
+    return render(request, template, context)

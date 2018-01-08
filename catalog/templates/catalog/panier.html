@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<script LANGUAGE="JavaScript">
+document.location.href="{% url 'user'%}"
+</script>
+    <table class='table'>
+                {% for item in cart.items.all %}
+                <tr>
+                        <td>{{ item.get_title }}</td>
+                        <td> {{ item.get_quantity }}</td>
+                        <td class='text-right' >
+                        <a href='{{ item.item.remove_from_cart }}'>X</a>
+                        </td>
+                </tr>
+                {% endfor %}
+        </table>
+    
+{% endblock %}

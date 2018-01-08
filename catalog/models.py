@@ -5,10 +5,7 @@ from datetime import date
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
-
 import uuid
-
-
 
 image_storage = FileSystemStorage(
         location=u'{0}/'.format(settings.MEDIA_ROOT), 
@@ -31,9 +28,19 @@ class Book(models.Model):
     isbn = models.CharField('ISBN',max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
     photo = models.ImageField(upload_to="media/images/", null=True, blank=True)
+    quantity = models.DecimalField(max_digits=5, decimal_places=0, default=0)
     
     def __str__(self):
         return self.title
+    
+    def get_title(self):
+        return "%s" %(self.title)
+
+    def remove_from_cart(self):
+        return "%s?ItemID=%s&qty=1&DeleteItem=True" %(reverse("cart"), self.id)
+    
+    def get_quantity(self):
+        return self.quantity
     
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
@@ -115,3 +122,22 @@ def is_overdue(self):
         return True
     return False
 
+class Panier(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Book, through = 'PanierItem')
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    
+    def __str__(self):
+        return str(self.id)
+        
+class PanierItem(models.Model):
+    cart = models.ForeignKey(Panier, on_delete=models.CASCADE)
+    item = models.ForeignKey(Book, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=5, decimal_places=0, default=1)
+    
+    def __str__(self):
+        return self.item.title
+    
+    def remove(self):
+                return self.item.remove_from_cart()

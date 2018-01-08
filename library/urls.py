@@ -5,7 +5,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('catalog/', include('catalog.urls')),
-    path('dynamic/', include('dynamic.urls')),
     path('admin/', admin.site.urls),
 ]
 

@@ -1,0 +1,114 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Comparaison d'article</h1>
+    
+    <form method="get" action=".">
+    <div>
+        <nav class="nav-extended" style="background-color:rgb(150, 100, 250);">
+            <div class="nav-wrapper">
+              <h10 href="{% url 'user' %}" class="brand-logo">&nbsp; Articles à comparer (max. 4)</h10>
+              <input type="submit" style="float:right" class="btn btn-default" value="Envoyer pour comparaison"/>
+            </div>
+        </nav>
+    </div>
+    
+    <hr>    
+    
+    <div class="row">
+        <div class="col s3">
+            <table class="striped">
+                    <!--{% csrf_token %}-->
+                    <select name="comp1" class="browser-default">
+                        <option value="" disabled selected>Choose your product</option>
+                        {% for book in book.all %}
+                          <option value="{{book.id}}">{{book.title}}</option>
+                         {% endfor %}
+                    </select>
+                    <!-- <input type="submit" class="btn btn-default" value="Envoyer pour comparaison"/>-->
+               <!-- </form>-->
+                <td>
+                    <table class="striped">
+                        <tr><td>{{comp1.title}}</td></tr>
+                        <tr><td>{{comp1.author}}</td></tr>
+                        <tr><td>{{comp1.genre}}</td></tr>
+                    </table>
+                </td>
+            </table>
+            
+            </div>
+            
+            <div class="col s3">
+            
+            <table class="striped">
+                <form method="get" action=".">
+                    <!--{% csrf_token %}-->
+                    <select name="comp2" class="browser-default">
+                        <option value="" disabled selected>Choose your product</option>
+                        {% for book in book.all %}
+                          <option value="{{book.id}}">{{book.title}}</option>
+                         {% endfor %}
+                    </select>
+                    <!-- <input type="submit" class="btn btn-default" value="Envoyer pour comparaison"/>-->
+                <!-- </form>-->
+                <td>
+                    <table class="striped">
+                        <tr><td>{{comp2.title}}</td></tr>
+                        <tr><td>{{comp2.author}}</td></tr>
+                        <tr><td>{{comp2.genre}}</td></tr>
+                    </table>
+                </td>
+            </table>
+            
+            </div>
+            
+            
+            <div class="col s3">
+            
+            <table class="striped">
+                <form method="get" action=".">
+                    <!--{% csrf_token %}-->
+                    <select name="comp3" class="browser-default">
+                        <option value="" disabled selected>Choose your product</option>
+                        {% for book in book.all %}
+                          <option value="{{book.id}}">{{book.title}}</option>
+                         {% endfor %}
+                    </select>
+                    <!-- <input type="submit" class="btn btn-default" value="Envoyer pour comparaison"/>-->
+                <!--</form>-->
+                <td>
+                    <table class="striped">
+                        <tr><td>{{comp3.title}}</td></tr>
+                        <tr><td>{{comp3.author}}</td></tr>
+                        <tr><td>{{comp3.genre}}</td></tr>
+                    </table>
+                </td>
+            </table>
+            
+            </div>
+            
+            
+            <div class="col s3">
+            
+            <table class="striped">
+                <form method="get" action=".">
+                    <!--{% csrf_token %}-->
+                    <select name="comp4" class="browser-default">
+                        <option value="" disabled selected>Choose your product</option>
+                        {% for book in book.all %}
+                          <option value="{{book.id}}">{{book.title}}</option>
+                         {% endfor %}
+                    </select>
+                </form>
+                <td>
+                    <table class="striped">
+                        <tr><td>{{comp4.title}}</td></tr>
+                        <tr><td>{{comp4.author}}</td></tr>
+                        <tr><td>{{comp4.genre}}</td></tr>
+                    </table>
+                </td>
+            </table>
+        </div>
+    </div>
+  
+{% endblock %}  

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Author, Genre, Book, BookInstance, Boutique
+from .models import Author, Genre, Book, BookInstance, Boutique, Panier, PanierItem
 from import_export.admin import ImportExportModelAdmin
 
 class BookAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'author', 'display_genre')
+    list_display = ('title', 'author', 'display_genre', 'quantity')
     search_fields = ('title', 'author')
 admin.site.register(Book, BookAdmin)
 
@@ -30,3 +30,13 @@ admin.site.register(Genre, GenreAdmin)
 @admin.register(Boutique)
 class BoutiqueAdmin(ImportExportModelAdmin):
     list_display = ('name', 'open_year', 'street', 'city', 'zip_code')
+
+class PanierItemInline(admin.TabularInline):
+    model = PanierItem
+    
+class PanierAdmin(admin.ModelAdmin):
+    inlines = [ PanierItemInline ]
+    class Meta:
+        model = Panier
+
+admin.site.register(Panier, PanierAdmin)

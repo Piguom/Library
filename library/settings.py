@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'catalog',
-    'dynamic',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +135,5 @@ REST_FRAMEWORK = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
