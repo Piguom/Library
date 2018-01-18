@@ -48,6 +48,7 @@
         
     <div class="container" style="width:90%;">
         <table class="striped">
+            <th>Panier</th>
             <th>Produit</th>
             <th>Quantité</th>
             <th>Date d'ajout</th>
@@ -57,6 +58,7 @@
                         {% for product in carte.items.all %}
                             <tr>
                                 <form action="{% url 'cart' %}" method="GET" >
+                                    <td>{{carte.id}}</td> 
                                     <td>{{ product.get_title }}</td>
                                     <input type='hidden' name='ItemID' value='{{ product.id }}' />
                                     <td>

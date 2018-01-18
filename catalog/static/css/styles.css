@@ -3,3 +3,41 @@
     padding: 0;
     list-style: none;
 }
+
+.tabulation {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 48px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    white-space: nowrap;
+}
+
+.tabulation .tab {
+    display: inline-block;
+    text-align: center;
+    line-height: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.tabulation .tab a {
+    color: rgba(238,110,115,0.7);
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-transition: color .28s ease;
+    transition: color .28s ease;
+}
+
+a:active, a:hover {
+    outline: 0;
+}
