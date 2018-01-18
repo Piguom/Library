@@ -1,8 +1,8 @@
 alabaster==0.7.10
 anaconda-client==1.6.6
-anaconda-navigator==1.6.11
-anaconda-project==0.8.0
-asn1crypto==0.22.0
+anaconda-navigator==1.6.12
+anaconda-project==0.8.2
+asn1crypto==0.24.0
 astroid==1.5.3
 astropy==2.0.2
 awsebcli==3.12.1
@@ -23,7 +23,7 @@ CacheControl==0.12.3
 cart==1.0.9
 cement==2.8.2
 certifi==2017.11.5
-cffi==1.10.0
+cffi==1.11.2
 chardet==3.0.4
 click==6.7
 cloudpickle==0.4.0
@@ -34,7 +34,7 @@ conda==4.4.6
 conda-build==3.0.27
 conda-verify==2.0.0
 contextlib2==0.5.5
-cryptography==2.0.3
+cryptography==2.1.4
 cycler==0.10.0
 Cython==0.26.1
 cytoolz==0.8.2
@@ -99,7 +99,7 @@ greenlet==0.4.12
 h5py==2.7.0
 heapdict==1.0.0
 heroku==0.1.4
-html5lib==0.9999999
+html5lib==1.0.1
 idna==2.6
 imageio==2.2.0
 imagesize==0.7.1
@@ -111,13 +111,13 @@ isort==4.2.15
 itsdangerous==0.24
 jdcal==1.3
 jedi==0.11.1
-Jinja2==2.9.6
+Jinja2==2.10
 jmespath==0.9.3
 jsonfield==2.0.2
 jsonschema==2.6.0
 jupyter-client==5.1.0
 jupyter-console==5.2.0
-jupyter-core==4.3.0
+jupyter-core==4.4.0
 jupyterlab==0.27.0
 jupyterlab-launcher==0.4.0
 lazy-object-proxy==1.3.1
@@ -131,7 +131,7 @@ mccabe==0.6.1
 menuinst==1.4.10
 mistune==0.7.4
 mpmath==0.19
-msgpack-python==0.4.8
+msgpack-python==0.5.1
 multipledispatch==0.4.9
 navigator-updater==0.1.0
 nbconvert==5.3.1
@@ -141,7 +141,7 @@ nltk==3.2.4
 nose==1.3.7
 notebook==5.0.0
 numba==0.35.0+10.g143f70e
-numexpr==2.6.2
+numexpr==2.6.4
 numpy==1.13.3
 numpydoc==0.7.0
 odfpy==1.3.6
@@ -165,7 +165,7 @@ pkginfo==1.4.1
 ply==3.10
 progress==1.3
 prompt-toolkit==1.0.15
-psutil==5.4.0
+psutil==5.4.3
 psycopg2==2.7.3.2
 py==1.4.34
 pycodestyle==2.3.1
@@ -178,7 +178,7 @@ pyflakes==1.6.0
 Pygments==2.2.0
 pylint==1.7.4
 pyodbc==4.0.17
-pyOpenSSL==17.2.0
+pyOpenSSL==17.5.0
 pyparsing==2.2.0
 PySocks==1.6.7
 pytest==3.2.1
@@ -199,7 +199,7 @@ route53==1.0.1
 ruamel-yaml==0.11.14
 scikit-image==0.13.0
 scikit-learn==0.19.1
-scipy==0.19.1
+scipy==1.0.0
 seaborn==0.8
 semantic-version==2.5.0
 simplegeneric==0.8.1
@@ -223,7 +223,7 @@ termcolor==1.1.0
 testpath==0.3.1
 tldextract==2.2.0
 toolz==0.8.2
-tornado==4.5.2
+tornado==4.5.3
 traitlets==4.3.2
 typing==3.6.2
 unicodecsv==0.14.1
