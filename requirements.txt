@@ -68,7 +68,7 @@ djangocms-admin-style==1.2.7
 djangocms-cascade==0.15.4
 djangocms-multisite==0.1.1
 djangocms-text-ckeditor==3.5.1
-djangorestframework==3.7.7
+djangorestframework==3.11.2
 docker-py==1.7.2
 dockerpty==0.4.1
 docopt==0.6.2
