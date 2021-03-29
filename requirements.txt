@@ -161,7 +161,7 @@ pycrypto==2.6.1
 pycryptodome==3.4.7
 pycurl==7.43.0
 pyflakes==1.6.0
-Pygments==2.2.0
+Pygments==2.7.4
 pylint==1.7.4
 pyOpenSSL==17.5.0
 pyparsing==2.2.0
