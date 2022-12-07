@@ -18,7 +18,7 @@ bs4==0.0.1
 CacheControl==0.12.3
 cart==1.0.9
 cement==2.8.2
-certifi==2017.11.5
+certifi==2022.12.7
 cffi==1.11.2
 chardet==3.0.4
 click==6.7
